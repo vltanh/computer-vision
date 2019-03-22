@@ -80,12 +80,11 @@ def edge_detection(img, high_threshold_ratio=0.09, low_threshold_ratio=0.05, vis
     nomax = non_max_suppression(d, angle)
 
     # Step 4: Hysteresis
-    high_threshold_ratio = [high_threshold_ratio] if not isinstance(high_threshold_ratio, list) else high_threshold_ratio
-    low_threshold_ratio = [low_threshold_ratio] if not isinstance(low_threshold_ratio, list) else low_threshold_ratio
-    for high, low in itertools.product(high_threshold_ratio, low_threshold_ratio):
-        thresholded = double_threshold(nomax, high_threshold_ratio=high, low_threshold_ratio=low)
-        final = hysteresis(thresholded)
-        show_image(final, 'Hysteresis {}, {}'.format(high, low))
+    thresholded = double_threshold(nomax, high_threshold_ratio=high_threshold_ratio, 
+                                            low_threshold_ratio=low_threshold_ratio)
+    final = hysteresis(thresholded)
+    for _ in range(100):
+        final = hysteresis(final)
 
     # Visualization
     if visualize:
@@ -96,5 +95,6 @@ def edge_detection(img, high_threshold_ratio=0.09, low_threshold_ratio=0.05, vis
         show_image(d, 'Gradient Intensity')
         show_image(nomax, 'Non-max Suppression')
         show_image(thresholded, 'Double Threshold')
+        show_image(final, 'Hysteresis')
 
-    return nomax
+    return final
