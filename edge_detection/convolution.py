@@ -3,6 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import transform_visualizable
 
+'''
+@ Helper for the apply, with visualization (before and after)
+@ img: source image
+@ kernel: the filter to apply
+@ visualize: whether to visualize or not
+@ return the result image
+'''
 def convolution(img, kernel, visualize=False):
     filtered_img = img.copy()
     filtered_img = filter(filtered_img, kernel)
@@ -17,6 +24,14 @@ def convolution(img, kernel, visualize=False):
         plt.close()
     return filtered_img
 
+'''
+@ Apply a filter to an image
+@ img: source image
+@ kernel: the filter used
+@ mode: (reflect, replicate, wrap), mode to fill the image
+        padding before applying
+@ returns the result image
+'''
 def filter(img, kernel, mode = 'reflect'):
     # Get kernel size
     kernel_h, kernel_w = kernel.shape
@@ -46,6 +61,8 @@ def filter(img, kernel, mode = 'reflect'):
                     temp += padded_img[r + i][c + j] * kernel[i + padding_v][j + padding_h]
             filtered[r - padding_v][c - padding_h] = temp
     return filtered
+
+''' Kernels for convolution '''
 
 # Identity
 identity = np.array([[0, 0, 0], 
@@ -81,7 +98,11 @@ prewitt_v = np.array([[1, 1, 1],
                       [0, 0, 0],
                       [-1, -1, -1]])  
 
-laplacian = np.array([[-1, -1, -1],
-                      [-1, 8, -1],
-                      [-1, -1, -1]])    
+laplacian_8 = np.array([[-1, -1, -1],
+                        [-1, 8, -1],
+                        [-1, -1, -1]])
+
+laplacian_4 = np.array([[0, -1, 0],
+                        [-1, 4, -1],
+                        [0, -1, 0]])    
     

@@ -25,7 +25,7 @@ def detect_by_prewitt(img, visualize=True):
     return transform_visualizable(d)
 
 def detect_by_laplacian(img, visualize=True):
-    return transform_visualizable(conv.convolution(img, conv.laplacian))
+    return transform_visualizable(conv.convolution(img, conv.laplacian_8))
 
 CMD_SOBEL = 'sobel'
 CMD_PREWITT = 'prewitt'
