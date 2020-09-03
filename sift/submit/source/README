@@ -1,0 +1,13 @@
+Để chạy nhận diện trên 1 ảnh:
+	python3 main.py <image_dir> <detector_code>
+Để chạy so khớp đặc trưng trên 2 ảnh:
+	python3 main.py <image_dir_1> <image_dir_2> <detector_code>
+Trong đó:
+	image_dir là đường dẫn đến ảnh
+	detector_code là mã bộ phát hiện đặc trưng:
+		0: Harris
+		1: Difference of Gaussian
+		2: Laplacian of Gaussian
+Ví dụ:
+	python3 main.py ./input/calc_1.jpg ./input/calc_2.jpg 0
+	python3 main.py ./input/test.jpg 1
